@@ -86,7 +86,12 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
-  }
+  },
+  { title: "test title",
+   date: "test content",
+    firstParagraph: "1st thing",
+    secondParagraph: "2nd thing",
+    thirdParagraph: "3rd thing" }
 ];
 
 /*
@@ -114,3 +119,56 @@ const data = [
   Step 5: Try adding new article object to the data array. Make sure it is in the same format as the others.
   Refresh the page to see the new article.
 */
+function articleMaker({title, date, firstParagraph, secondParagraph, thirdParagraph}){
+  
+  //step 1
+  const article = document.createElement("div");
+  const arttitle = document.createElement('h2');
+  const artdate = document.createElement('p');
+  const firstP = document.createElement('p');
+  const secondP = document.createElement('p');
+  const thirdP = document.createElement('p');
+  const expandButton = document.createElement('span');
+
+  article.appendChild(arttitle);
+  article.appendChild(artdate);
+  article.appendChild(firstP);
+  article.appendChild(secondP);
+  article.appendChild(thirdP);
+  article.appendChild(expandButton);
+
+  article.classList.add('article');
+  artdate.classList.add('date');
+  expandButton.classList.add('expandButton');
+  
+  arttitle.textContent = title;
+  artdate.textContent = date;
+  expandButton.textContent = '+';
+  firstP.textContent = firstParagraph;
+  secondP.textContent = secondParagraph;
+  thirdP.textContent = thirdParagraph;
+
+  //step2
+  expandButton.addEventListener('click', event => {
+    article.classList.toggle('article-open');
+  });
+  //step 3
+  return article;
+}
+//step 4
+const container = document.querySelector('.articles')
+const body = document.querySelector('body')
+
+const artElms = data.map((data)=>{
+  return articleMaker(data);
+})
+
+artElms.forEach((artElms) => {
+ 
+  container.appendChild(artElms);
+});
+
+//step 5
+
+const test = articleMaker({ title: "Second Test", date: "test content2", firstParagraph: "1st thing2", secondParagraph: "2nd thing2", thirdParagraph: "3rd thing2" });
+container.appendChild(test)
