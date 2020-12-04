@@ -1,12 +1,12 @@
 // This is the data we will be using, study it but don't change anything, yet.
 
 let menuItems = [
-  'Students',
-  'Faculty',
+  "Students",
+  "Faculty",
   "What's New",
-  'Tech Trends',
-  'Music',
-  'Log Out'
+  "Tech Trends",
+  "Music",
+  "Log Out",
 ];
 
 /* 
@@ -31,43 +31,29 @@ let menuItems = [
 
   Step 6: Use 'menuMaker' to create a menu using the 'menuItems' array, and append the returned menu to the header.
 */
- //Step 1
-  function menuMaker(menuItems){
-    
-    const container = document.createElement('div')
-    const uList = documnet.createElement('ul')
-    const menuItem = document.createElement('li')
 
-    container.appendChild(uList)
-    uList.appendChild(menuItem)
 
-    container.classList.add('menu')
+function menuMaker(data){
+  //create elms
+  const mainDiv = document.createElement('div')
+  const list = document.createElement('ul')
+  menuItems.forEach((item)=>{
+    const listItem = document.createElement('li')
+    listItem.textContent = item
+    list.appendChild(listItem)
+  })
+  //place elms and add class
+  mainDiv.classList.add('menu')
+  mainDiv.appendChild(list)
+  //OnClick Event
+  const menuButton = document.querySelector('.menu-button')
+  menuButton.addEventListener('click', event =>{
+  mainDiv.classList.toggle('menu--open')
+})
+//return div
+return mainDiv
+}
+const head = document.querySelector('.header')
+const menu1 = menuMaker(menuItems);
+head.appendChild(menu1);
 
-    menuItem.textContent = (menuItems)
-    //step 2
-
-    const items = menuItems.map((menuItems)=>{
-      return menuMaker(menuItems)
-    })
-    
-    items.forEach((items) => {
-     
-      container.appendChild(items)
-    });
-
-    //step 3
-    const menuButton = document.querySelector('.menu-button')
-
-    //step4
-    menuButton.addEventListener('click', event =>{
-      debugger;
-      container.classList.toggle('menu--open')
-      //step 5
-      return container
-    })
-  }
-  //step 6
-  const header = document.querySelector('.header')
-
-  const menuTest = menuMaker(menuItems)
-  header.appendChild(menuTest)
